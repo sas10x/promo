@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "chbc",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
