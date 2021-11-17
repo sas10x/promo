@@ -1,0 +1,52 @@
+<ion-content class="ion-padding">
+  <img src="assets/chbc_promo.jpg">
+  <h1>Cebu Home and Builders Centre</h1>
+  <h3>Raffle!</h3>
+  <form [formGroup]="ionicForm" #f="ngForm" (ngSubmit)="submitForm(f.value)" novalidate>
+    <div class="form-field">
+      <ion-button class="reset" (click)="reset()">Reset</ion-button>
+    </div>
+    <div class="form-field">
+      <label [ngClass]="focused ? 'label-focused' : ''">Full Name</label>
+      <input formControlName="fullName" type="text" (focus)="focused = true" (blur)="onBlur($event)" required autocomplete="off"/>
+    </div>
+    <div class="form-field">
+      <label [ngClass]="focused ? 'label-focused' : ''">Contact Number</label>
+      <input formControlName="contactNumber" id="contactNumber" type="number" (focus)="focused = true" (blur)="onBlur($event)" required/>
+    </div>
+    <div class="form-field">
+      <label [ngClass]="focused ? 'label-focused' : ''">Email Address</label>
+      <input formControlName="email" type="text" (focus)="focused = true" (blur)="onBlur($event)" required/>
+    </div>
+    <div class="receipt" *ngIf="sap">
+      <div class="form-field">
+        <label [ngClass]="focused ? 'label-focused' : ''">SO # (if receipt has SO #)</label>
+        <input formControlName="soNumber" type="text" (focus)="focused = true" (blur)="onBlur($event)" (change)="onSAP($event)"/>
+      </div>
+    </div>
+    <div class="receipt" *ngIf="pos">
+      <div class="form-field part1">
+        <label class="label-focused">Terminal</label>
+          <ion-select interface="popover" formControlName="terminal" type="text" (focus)="focused = true" (blur)="onBlur($event)" autocomplete="off">
+            <ion-select-option *ngFor="let terminal of terminals" value="{{terminal}}">{{terminal}}</ion-select-option>
+          </ion-select>
+      </div>
+      <div class="form-field part2">
+        <label [ngClass]="focused ? 'label-focused' : ''">Trans #</label>
+        <input formControlName="trans" type="text" (focus)="focused = true" (blur)="onBlur($event)" (change)="onPOS($event)" autocomplete="off"/>
+      </div>
+    </div>
+    <div class="form-field">
+      <label [ngClass]="focused ? 'label-focused' : ''">Amount</label>
+      <input formControlName="amount" type="number" (focus)="focused = true" (blur)="onBlur($event)" required autocomplete="off"/>
+    </div>
+    <div class="form-field">
+      <label [ngClass]="focused ? 'label-focused' : ''">Address</label>
+      <input formControlName="address" type="text" (focus)="focused = true" (blur)="onBlur($event)" required autocomplete="off"/>
+    </div>
+    <div class="form-field">
+      <ion-button class="submit" expand='block' [disabled]="!f.valid" (click)="submitForm(f.value)">Submit</ion-button>
+    </div>
+  </form>
+  <p class="footer-text"><strong>Stay Healthy!</strong> <i> Keep Safe!</i></p>
+</ion-content>

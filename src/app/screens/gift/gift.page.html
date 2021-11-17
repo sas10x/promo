@@ -1,0 +1,124 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-title>Ionic Forms</ion-title> -->
+    <img src="assets/chbc_promo.jpg">
+    <h1>Cebu Home and Builders Centre</h1>
+    <h3>Raffle!</h3>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="main">
+  <ion-button class="reset" (click)="reset()">Reset</ion-button>
+  <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
+    <ion-item lines="full">
+      <ion-label position="floating">Name</ion-label>
+      <ion-input formControlName="fullName" type="text"></ion-input>
+    </ion-item>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.fullName.errors?.required">
+      Name is required.
+    </span>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.fullName.errors?.minlength">
+      Name should be min 3 chars long.
+    </span>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.fullName.errors?.maxlength">
+      You reach max character allowed.
+    </span>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Email</ion-label>
+      <ion-input formControlName="email" type="email"></ion-input>
+    </ion-item>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
+      Email is required.
+    </span>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.pattern">
+      Please provide valid email id.
+    </span>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.maxlength">
+      You reach max character allowed.
+    </span>
+    <ion-item lines="full">
+      <ion-label position="floating">Mobile</ion-label>
+      <ion-input maxlength="10" formControlName="mobile" type="number" required></ion-input>
+    </ion-item>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.mobile.errors?.required">
+      Mobile number is required.
+    </span>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.mobile.errors?.pattern">
+      Only numerical values allowed.
+    </span>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.mobile.errors?.minlength">
+      PH mobiles numbers atleast 10 characters
+    </span>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.mobile.errors?.maxlength">
+      You reach max character allowed.
+    </span>
+    <div class="receipt" *ngIf="pos">
+      <!-- terminal -->
+      <ion-item lines="full">
+        <ion-label position="floating">Terminal</ion-label>
+        <ion-select interface="popover" formControlName="terminal" type="text" autocomplete="off">
+          <ion-select-option *ngFor="let terminal of terminals" value="{{terminal}}">{{terminal}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.terminal.errors?.required">
+        terminale is required.
+      </span>
+    <!-- trans -->
+      <ion-item lines="full">
+        <ion-label position="floating">Trans #</ion-label>
+        <ion-input formControlName="trans" type="text" (ionChange)="onPOS($event)"></ion-input>
+      </ion-item>
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.trans.errors?.minlength">
+        Transaction number should atleast be 5 chars long.
+      </span>
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.trans.errors?.maxlength">
+        You reach max character allowed.
+      </span>
+    </div>
+    <div class="receipt" *ngIf="sap">
+      <!-- soNumber -->
+      <ion-item lines="full">
+        <ion-label position="floating">SO #(if receipt has SO #)</ion-label>
+        <ion-input formControlName="soNumber" type="text" (ionChange)="onSAP($event)"></ion-input>
+      </ion-item>
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.soNumber.errors?.minlength">
+        SO number should atleast be 5 chars long.
+      </span>
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.soNumber.errors?.maxlength">
+        You reach max character allowed.
+      </span>
+    </div>
+    <!-- amount -->
+    <ion-item lines="full">
+      <ion-label position="floating">Amount</ion-label>
+      <ion-input formControlName="amount" type="number"></ion-input>
+    </ion-item>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.amount.errors?.required">
+      amount is required.
+    </span>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.amount.errors?.min">
+      You should atleast bought PHP5000 to avail.
+    </span>
+    <!-- address -->
+    <ion-item lines="full">
+      <ion-label position="floating">Address</ion-label>
+      <ion-input formControlName="address" type="text"></ion-input>
+    </ion-item>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.address.errors?.required">
+      address is required.
+    </span>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.address.errors?.minlength">
+      Address should atleast be 3 characters long.
+    </span>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.address.errors?.maxlength">
+      You reach max character allowed.
+    </span>
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="danger" expand="block" *ngIf="!loading">Submit</ion-button>
+        <ion-spinner *ngIf="loading"></ion-spinner>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>
