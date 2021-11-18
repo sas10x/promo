@@ -5,5 +5,33 @@
 </ion-header>
 
 <ion-content>
-
+  <!-- <button (click)="delete()">Delete</button>
+  <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by country name"
+      [(ngModel)]="searchTerm"/>
+  <br> -->
+  <nz-table #basicTable [nzData]="customers">
+    <thead>
+      <tr>
+        <th>UID</th>
+        <th>Name</th>
+        <th>terminal</th>
+        <th>soNumber</th>
+        <th>terminal</th>
+        <th>trans</th>
+        <th>amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{data.uid}}</td>
+        <td>{{data.fullName}}</td>
+        <td>{{data.terminal}}</td>
+        <td>{{data.soNumber}}</td>
+        <td>{{data.terminal}}</td>
+        <td>{{data.trans}}</td>
+        <td>{{data.amount}}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <button (click)="exportToArray()">Export</button>
 </ion-content>

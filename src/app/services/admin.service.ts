@@ -12,4 +12,10 @@ export class AdminService {
   getCustomers(): Observable<DocumentChangeAction<DocumentData>[]> {
     return this.angularFirestore.collection('customers').snapshotChanges();
   }
+  deleteUser(uid) {
+    return this.angularFirestore
+      .collection("customers")
+      .doc(uid)
+      .delete();
+  }
 }

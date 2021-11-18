@@ -30,9 +30,14 @@
                 "input": "node_modules/ionicons/dist/ionicons/svg",
                 "output": "./svg"
               },
-              "src/manifest.webmanifest"
+              "src/manifest.webmanifest",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
+              }
             ],
-            "styles": ["src/theme/variables.scss", "src/global.scss"],
+            "styles": ["./node_modules/ng-zorro-antd/ng-zorro-antd.min.css","src/theme/variables.scss", "src/global.scss"],
             "scripts": [],
             "aot": false,
             "vendorChunk": true,
@@ -100,7 +105,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "styles": [],
+            "styles": [ "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css"],
             "scripts": [],
             "assets": [
               {
